@@ -15,12 +15,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DatabaseQueryHelper {
+public class DB {
 
     private Context context;
 
     // 생성자
-    public DatabaseQueryHelper(Context context) {
+    public DB(Context context) {
         this.context = context;
     }
 
@@ -40,11 +40,11 @@ public class DatabaseQueryHelper {
                                 if (jsonObject.has("data")) {
                                     // SELECT 쿼리 결과 처리
                                     JSONArray data = jsonObject.getJSONArray("data");
-                                    listener.onQuerySuccess(data);  // 성공 시 콜백
+                                    listener.onQuerySuccess(data);  // 성공 시 콜백 (Json)
                                 } else {
                                     // INSERT, UPDATE, DELETE 성공 메시지 처리
                                     String message = jsonObject.getString("message");
-                                    listener.onQuerySuccess(message);  // 성공 시 콜백
+                                    listener.onQuerySuccess(message);  // 성공 시 콜백 (String)
                                 }
                             } else {
                                 String message = jsonObject.getString("message");
@@ -71,7 +71,7 @@ public class DatabaseQueryHelper {
             }
         };
 
-        // 요청 큘에 추가
+        // 요청 큐에 추가
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
