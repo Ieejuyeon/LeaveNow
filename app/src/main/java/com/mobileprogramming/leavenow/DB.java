@@ -24,15 +24,8 @@ public class DatabaseQueryHelper {
         this.context = context;
     }
 
-    // 쿼리 실행 후 결과를 콜백으로 반환
-    public void executeQuery(String query, final QueryCallback callback) {
+    public void executeQuery(String query, final QueryResponseListener listener) {
         String url = "http://104.154.220.216/execute_query1.php";  // 서버 URL
-
-        // 입력값 검증
-        if (query.isEmpty()) {
-            callback.onQueryError("쿼리문을 입력하세요.");
-            return;
-        }
 
         // Volley 요청
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -47,26 +40,26 @@ public class DatabaseQueryHelper {
                                 if (jsonObject.has("data")) {
                                     // SELECT 쿼리 결과 처리
                                     JSONArray data = jsonObject.getJSONArray("data");
-                                    callback.onQuerySuccess(data);  // 성공 시 콜백 호출, JSONArray 전달
+                                    listener.onQuerySuccess(data);  // 성공 시 콜백
                                 } else {
-                                    // INSERT, UPDATE, DELETE 등의 쿼리인 경우
+                                    // INSERT, UPDATE, DELETE 성공 메시지 처리
                                     String message = jsonObject.getString("message");
-                                    callback.onQuerySuccess(message);  // 성공 메시지 전달
+                                    listener.onQuerySuccess(message);  // 성공 시 콜백
                                 }
                             } else {
                                 String message = jsonObject.getString("message");
-                                callback.onQueryError(message);  // 실패 시 콜백 호출
+                                listener.onQueryError(message);  // 실패 시 콜백
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            callback.onQueryError("응답 처리 중 오류 발생.");
+                            listener.onQueryError("응답 처리 중 오류 발생.");
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        callback.onQueryError("서버와의 통신 중 오류 발생.");
+                        listener.onQueryError("서버와의 통신 중 오류 발생.");
                     }
                 }) {
             @Override
@@ -84,8 +77,8 @@ public class DatabaseQueryHelper {
     }
 
     // 쿼리 실행 결과를 처리할 콜백 인터페이스
-    public interface QueryCallback {
-        void onQuerySuccess(Object result);  // 성공 시 호출, 결과는 String 또는 JSONArray
+    public interface QueryResponseListener {
+        void onQuerySuccess(Object data);  // 성공 시 호출
         void onQueryError(String errorMessage);  // 오류 발생 시 호출
     }
 }
