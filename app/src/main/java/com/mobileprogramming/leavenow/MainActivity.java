@@ -16,7 +16,7 @@ import org.json.JSONException;
 
 public class MainActivity extends AppCompatActivity {
     public static String ID;
-
+    public static String NICKNAME;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

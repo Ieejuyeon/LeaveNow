@@ -21,24 +21,9 @@ public class HomeActivity extends AppCompatActivity {
         id = MainActivity.ID;
 
         // MainActivity에 입력된 ID를 이용하여 user의 name을 가져오는 구문
-        String loginQuery = "SELECT name FROM user WHERE id = '" + id + "'";
+        String loginQuery = "SELECT nickname FROM user WHERE user_id = '" + id + "'";
         DB db = new DB(HomeActivity.this);
-        db.executeQuery(loginQuery, new DB.QueryResponseListener() {
-            @Override
-            public void onQuerySuccess(Object data) {
-                JSONArray jsonArray = (JSONArray) data;
-                try {
-                    name = jsonArray.getJSONObject(0).getString("name");
-                    tv_name.setText( name + "님.");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onQueryError(String errorMessage) {
-                System.out.println(errorMessage);;
-            }
-        });
+        tv_name.setText(MainActivity.NICKNAME + "님.");
 
     }
 }
