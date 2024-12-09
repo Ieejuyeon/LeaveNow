@@ -15,7 +15,7 @@ import org.json.JSONException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText et_id;
+    private EditText et_email;
     private EditText et_pw;
     private Button btn_submit;
     private Button btn_back;
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_submit = findViewById(R.id.btn_submit);
         btn_back = findViewById(R.id.btn_back);
         et_pw = findViewById(R.id.et_pw);
-        et_id = findViewById(R.id.et_id);
+        et_email = findViewById(R.id.et_id);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,15 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userId = et_id.getText().toString().trim();
+                String userEmail = et_email.getText().toString().trim();
                 String userPw = et_pw.getText().toString().trim();
 
-                if (!userId.isEmpty() && !userPw.isEmpty()) {
+                if (!userEmail.isEmpty() && !userPw.isEmpty()) {
 
                     // DB 사용 부분 !!!!
 
                     // 쿼리 지정, DB객체생성 (DB(context))
-                    String loginQuery = "SELECT name FROM user WHERE id = '" + userId + "' AND pw = '" + userPw + "'";
+                    String loginQuery = "SELECT nickname, user_id FROM user WHERE email = '" + userEmail + "' AND password = '" + userPw + "'";
                     DB db = new DB(LoginActivity.this);
 
                     // executeQuery : 쿼리 보내는 함수, 파라미터는 ("쿼리문", QueryResponseListener 인터페이스 객체 )
@@ -61,9 +61,10 @@ public class LoginActivity extends AppCompatActivity {
                             // SELECT 결과 (JsonArray) 처리
                             JSONArray jsonArray = (JSONArray) data;
                             try {
-                                String name = jsonArray.getJSONObject(0).getString("name");  // 첫 번째 행에서 이름 가져오기
-                                MainActivity.ID = userId;  // 로그인 성공 시 static 변수에 아이디 저장
-                                tv_result.setText("로그인 성공: " + name + "\n아이디: " + MainActivity.ID);  // 화면에 출력
+                                // 로그인 성공 시 static 변수에 아이디 및 닉네임 저장
+                                MainActivity.ID = jsonArray.getJSONObject(0).getString("user_id");  // 첫 번째 행에서 이름 가져오기
+                                MainActivity.NICKNAME = jsonArray.getJSONObject(0).getString("nickname");  // 첫 번째 행에서 이름 가져오기
+                                tv_result.setText("로그인 성공" + "\n아이디: " + MainActivity.ID);  // 화면에 출력
                                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                             } catch (JSONException e) {
                                 e.printStackTrace();

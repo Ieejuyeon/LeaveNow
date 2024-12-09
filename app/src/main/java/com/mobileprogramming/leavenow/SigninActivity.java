@@ -16,9 +16,9 @@ import org.json.JSONException;
 public class SigninActivity extends AppCompatActivity {
 
 
-    private EditText et_id;
+    private EditText et_email;
     private EditText et_pw;
-    private EditText et_name;
+    private EditText et_nickname;
     private Button btn_submit;
     private TextView tv_result;
     private Button btn_back;
@@ -26,9 +26,9 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-        et_id = findViewById(R.id.et_id);
+        et_email = findViewById(R.id.et_id);
         et_pw = findViewById(R.id.et_pw);
-        et_name = findViewById(R.id.et_name);
+        et_nickname = findViewById(R.id.et_name);
         tv_result = findViewById(R.id.tv_result);
         btn_submit = findViewById(R.id.btn_submit);
         btn_back = findViewById(R.id.btn_back);
@@ -41,12 +41,12 @@ public class SigninActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userId = et_id.getText().toString().trim();
+                String userEmail = et_email.getText().toString().trim();
                 String userPw = et_pw.getText().toString().trim();
-                String userName = et_name.getText().toString().trim();
+                String userName = et_nickname.getText().toString().trim();
 
-                if (!userId.isEmpty() && !userPw.isEmpty() && !userName.isEmpty()) {
-                    String loginQuery = "INSERT into leavenow.user (id,pw,name) VALUES ('" + userId + "', '" + userPw + "', '" + userName + "'); ";
+                if (!userEmail.isEmpty() && !userPw.isEmpty() && !userName.isEmpty()) {
+                    String loginQuery = "INSERT into leavenow.user (email,password,nickname) VALUES ('" + userEmail + "', '" + userPw + "', '" + userName + "'); ";
                     DB db = new DB(SigninActivity.this);
 
                     db.executeQuery(loginQuery, new DB.QueryResponseListener() {
