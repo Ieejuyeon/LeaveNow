@@ -4,11 +4,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -28,7 +31,13 @@ public class PlanViewActivity extends AppCompatActivity {
         planAdapter pa = new planAdapter(this, title, date, contents);
         lv.setAdapter(pa);
 
-
+        ImageButton btn_newplan = (findViewById(R.id.btn_newplan));
+        btn_newplan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PlanCreateActivity.class));
+            }
+        });
     }
 
     class planAdapter extends ArrayAdapter<String>{

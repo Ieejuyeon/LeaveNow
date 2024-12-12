@@ -1,4 +1,4 @@
-gpackage com.mobileprogramming.leavenow;
+package com.mobileprogramming.leavenow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
