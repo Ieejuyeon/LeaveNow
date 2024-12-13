@@ -88,6 +88,13 @@ public class PlanCreateActivity extends AppCompatActivity {
                 else Toast.makeText(getApplicationContext(), "공백란이 있습니다.", Toast.LENGTH_LONG).show();
             }
         });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PlanViewActivity.class));
+            }
+        });
     }
 
 
