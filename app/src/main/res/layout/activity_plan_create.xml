@@ -27,14 +27,21 @@
                 android:textSize="20dp" />
 
             <EditText
+                android:maxLength="10"
                 android:id="@+id/title_plancreate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="여행 이름을 입력하세요."
                 android:padding="10dp" />
         </LinearLayout>
+        <TextView
+            android:textAlignment="textEnd"
+            android:text="공백 포함 글자 수 10자 제한"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +63,7 @@
             <TextView
                 android:id="@+id/datestart_plancreate"
                 android:textSize="20dp"
-                android:text="24.01.02"
+                android:text="25/01/01"
                 android:inputType="date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,7 +91,7 @@
             <TextView
                 android:id="@+id/dateend_plancreate"
                 android:textSize="20dp"
-                android:text="24.01.03"
+                android:text="25/01/01"
                 android:inputType="date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,10 +107,13 @@
                 android:layout_height="wrap_content"
                 android:text="미정"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
 
             <TextView
                 android:textColor="@color/black"
@@ -114,14 +124,20 @@
                 android:textSize="20dp" />
 
             <EditText
+                android:maxLength="45"
                 android:id="@+id/content_plancreate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="5"
-                android:lines="5"
+                android:maxLines="3"
+                android:lines="3"
                 android:hint="여행 내용을 입력하세요."
                 android:padding="10dp" />
         </LinearLayout>
+        <TextView
+            android:textAlignment="textEnd"
+            android:text="공백, 줄 바꿈 포함 45자 제한"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <LinearLayout
             android:layout_margin="20dp"
             android:gravity="center"
