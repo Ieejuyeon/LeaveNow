@@ -19,6 +19,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/title_plan_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="강릉"
@@ -27,6 +28,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/date_plan_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -34,19 +36,71 @@
                 android:textSize="15dp" />
         </LinearLayout>
         <TextView
+            android:id="@+id/content_plan_detail"
             android:maxLines="3"
             android:layout_marginTop="10dp"
             android:text="친구들과 함께"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-    <LinearLayout
+    <TabHost
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="match_parent" >
 
-        <Button
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-            android:layout_width="100dp"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+                <ListView
+                    android:id="@+id/day1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                </ListView>
+                <ListView
+                    android:id="@+id/day2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                </ListView>
+                <ListView
+                    android:id="@+id/day3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                </ListView>
+                <ListView
+                    android:id="@+id/day4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                </ListView>
+                <ListView
+                    android:id="@+id/day5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+                </ListView>
+            </FrameLayout>
+        </LinearLayout>
+
+    </TabHost>
 </LinearLayout>

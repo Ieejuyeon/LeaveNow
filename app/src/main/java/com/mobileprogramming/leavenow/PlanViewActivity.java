@@ -45,9 +45,7 @@ public class PlanViewActivity extends AppCompatActivity {
                         String date = jo.getString("start_date") + " ~ " + jo.getString("end_date");
                         String contents = jo.getString("contents");
                         int id = jo.getInt("plan_id");
-                        plans.add(new Plan(id, title, contents, date));
-                        Toast.makeText(getApplicationContext(), "query successed" , Toast.LENGTH_LONG).show();
-                    }
+                        plans.add(new Plan(id, title, contents, date)); }
                     runOnUiThread(() -> {
                         pa.notifyDataSetChanged();
                     });
@@ -106,7 +104,15 @@ public class PlanViewActivity extends AppCompatActivity {
                 ll.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getContext(), "clicked", Toast.LENGTH_SHORT).show();
+                        Context context = getContext();
+                        if (context instanceof PlanViewActivity) {
+                            Intent i = new Intent(context, PlanDetailsActivity.class);
+                            i.putExtra("plan_id", plan.id);
+                            i.putExtra("plan_title", plan.title);
+                            i.putExtra("plan_content", plan.contents);
+                            i.putExtra("plan_date", plan.date);
+                            context.startActivity(i);
+                        }
                     }
                 });
             }
