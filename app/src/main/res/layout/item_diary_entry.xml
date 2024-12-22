@@ -1,0 +1,58 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- 일기 제목 -->
+        <android.widget.Button
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diary Title"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="4dp"
+            android:layout_alignParentTop="true" />
+
+        <!-- 일기 날짜 -->
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024-12-01"
+            android:textSize="14sp"
+            android:textColor="#666"
+            android:layout_below="@id/tv_title"
+            android:layout_marginBottom="4dp" />
+
+        <!-- 일기 내용 미리보기 -->
+        <TextView
+            android:id="@+id/tv_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is a short preview of the diary content..."
+            android:textSize="14sp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:layout_below="@id/tv_date" />
+
+        <!-- 삭제 버튼 (오른쪽에 위치) -->
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:text="삭제"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp" />
+
+    </RelativeLayout>
+</FrameLayout>

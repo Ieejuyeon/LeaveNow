@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- 상단 바 -->
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- 삭제 버튼 텍스트 -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="'유저 이름'"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginEnd="16dp" />
+
+        <!-- 앱 이름 -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Diary List"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000" />
+    </LinearLayout>
+
+    <!-- RecyclerView: 일기 목록 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_bar"
+        android:layout_marginTop="8dp" />
+
+    <!-- 일기 추가 버튼 (동그란 버튼) -->
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="+"
+        android:textSize="24sp"
+        android:textColor="#fff"
+        android:gravity="center" />
+</RelativeLayout>
