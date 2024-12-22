@@ -6,13 +6,32 @@
     android:background="@color/white"
     android:orientation="horizontal">
 
-    <ImageView
+    <LinearLayout
+        android:id="@+id/time_plan_details"
+        android:gravity="center"
         android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/start_time"
+            android:text="00:00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="~"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/end_time"
+            android:text="08:00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
+        android:gravity="center"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,12 +45,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/content_plan_details"
-            android:text="전주시 효음동 23-3 길\n1박 당 5만원, 온돌방"
-            android:maxLines="2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
