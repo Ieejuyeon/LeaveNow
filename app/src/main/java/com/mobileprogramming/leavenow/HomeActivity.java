@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -13,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
 
     TextView tv_name;
     String id, name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,5 +28,47 @@ public class HomeActivity extends AppCompatActivity {
         DB db = new DB(HomeActivity.this);
         tv_name.setText(MainActivity.NICKNAME + "님.");
 
+
+        //네비게이션 바 기능
+        LinearLayout nav_home, nav_trip, nav_diary, nav_community;
+
+        nav_home = findViewById(R.id.nav_home);
+        nav_trip = findViewById(R.id.nav_trip);
+        nav_diary = findViewById(R.id.nav_diary);
+        nav_community = findViewById(R.id.nav_community);
+
+        nav_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        /*
+        nav_trip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, TripActivity.class);
+                startActivity(intent);
+            }
+        });
+         */
+        nav_diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, diary.class);
+                startActivity(intent);
+            }
+        });
+
+        nav_community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, CommunityActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
 }

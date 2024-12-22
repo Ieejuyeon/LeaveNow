@@ -80,5 +80,7 @@ public class DB {
     public interface QueryResponseListener {
         void onQuerySuccess(Object data);  // 성공 시 호출
         void onQueryError(String errorMessage);  // 오류 발생 시 호출
+
+        void onQueryError(Exception e);
     }
 }

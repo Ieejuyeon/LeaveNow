@@ -2,7 +2,9 @@ package com.mobileprogramming.leavenow;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +37,47 @@ public class diary extends AppCompatActivity implements DiaryAdapter.OnDiaryInte
             Intent intent = new Intent(diary.this, NewDiaryActivity.class);
             startActivityForResult(intent, 1);
         });
+
+        //네비게이션 바 기능
+        LinearLayout nav_home, nav_trip, nav_diary, nav_community;
+
+        nav_home = findViewById(R.id.nav_home);
+        nav_trip = findViewById(R.id.nav_trip);
+        nav_diary = findViewById(R.id.nav_diary);
+        nav_community = findViewById(R.id.nav_community);
+
+        nav_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(diary.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+        /*
+        nav_trip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, TripActivity.class);
+                startActivity(intent);
+            }
+        });
+         */
+        nav_diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(diary.this, diary.class);
+                startActivity(intent);
+            }
+        });
+
+        nav_community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(diary.this, CommunityActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void loadDiaries() {

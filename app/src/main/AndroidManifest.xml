@@ -33,8 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".diary" />
         <activity android:name=".NewDiaryActivity"></activity>
         <activity android:name=".DiaryDetailActivity"></activity>
+        <activity android:name=".CommunityActivity" />
+        <activity android:name=".PostCreateActivity" />
+        <activity android:name=".PostDetailActivity" />
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
