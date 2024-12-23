@@ -2,9 +2,12 @@ package com.mobileprogramming.leavenow;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
@@ -13,7 +16,19 @@ public class PostDetailActivity extends AppCompatActivity {
 
     private TextView titleView, contentView, authorView, dateView;
     private ImageView attachmentView;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_back, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.menuback){
+            finish();
+        };
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +40,6 @@ public class PostDetailActivity extends AppCompatActivity {
         dateView = findViewById(R.id.detailDate);
         attachmentView = findViewById(R.id.detailAttachment);
 
-        ImageView backIcon = findViewById(R.id.backIcon);
-        backIcon.setOnClickListener(v -> finish());
 
         // Intent로 전달된 데이터 가져오기
         String title = getIntent().getStringExtra("title");

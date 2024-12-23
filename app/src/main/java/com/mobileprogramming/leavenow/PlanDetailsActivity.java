@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,7 +42,7 @@ public class PlanDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plan_details);
 
 
-        Button btn_create = findViewById(R.id.btn_create_plandetail);
+        FloatingActionButton btn_create = findViewById(R.id.btn_create_plandetail);
         plan_id = getIntent().getIntExtra("plan_id", 0);
         plan_title = getIntent().getStringExtra("plan_title");
         plan_content = getIntent().getStringExtra("plan_content");
@@ -78,6 +81,46 @@ public class PlanDetailsActivity extends AppCompatActivity {
         title_plan_detail.setText(plan_title);
         content_plan_detail.setText(plan_content);
         date_plan_detail.setText(plan_date);
+        //네비게이션 바 기능
+        LinearLayout nav_home, nav_trip, nav_diary, nav_community;
+
+        nav_home = findViewById(R.id.nav_home);
+        nav_trip = findViewById(R.id.nav_trip);
+        nav_diary = findViewById(R.id.nav_diary);
+        nav_community = findViewById(R.id.nav_community);
+
+        nav_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        nav_trip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), PlanViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        nav_diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), diary.class);
+                startActivity(intent);
+            }
+        });
+
+        nav_community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         // 데이터 로드 및 탭 업데이트
         loadDataAndSetupTabs();
@@ -92,7 +135,7 @@ public class PlanDetailsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==R.id.menuback){
-            startActivity(new Intent(getApplicationContext(), PlanViewActivity.class));
+            finish();
         };
         return super.onOptionsItemSelected(item);
     }

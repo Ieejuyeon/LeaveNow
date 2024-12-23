@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class PostCreateActivity extends Activity {
+public class PostCreateActivity extends AppCompatActivity {
     private EditText etTitle, etContent;
     private Button btnAttachment, btnSave;
     private String attachmentPath = null;
@@ -35,8 +40,6 @@ public class PostCreateActivity extends Activity {
         btnAttachment = findViewById(R.id.btnAttachment);
         btnSave = findViewById(R.id.btnSave);
 
-        ImageView backIcon = findViewById(R.id.backIcon);
-        backIcon.setOnClickListener(v -> finish());
 
         // 첨부파일 버튼 클릭
         btnAttachment.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +69,19 @@ public class PostCreateActivity extends Activity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_back, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.menuback){
+            finish();
+        };
+        return super.onOptionsItemSelected(item);
+    }
     // 파일 선택 결과 처리
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.LeaveNow" parent="Theme.AppCompat.DayNight">
         <!-- Customize your light theme here. -->
-        <item name="windowNoTitle">true</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="title">"지금떠나"</item>
     </style>
 
     <style name="Theme.LeaveNow" parent="Base.Theme.LeaveNow" />
