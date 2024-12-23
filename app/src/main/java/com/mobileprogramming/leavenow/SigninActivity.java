@@ -60,10 +60,6 @@ public class SigninActivity extends AppCompatActivity {
                             tv_result.setText("오류: " + errorMessage);
                         }
 
-                        @Override
-                        public void onQueryError(Exception e) {
-
-                        }
                     });
 
                 } else {

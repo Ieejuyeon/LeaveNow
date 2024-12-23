@@ -95,15 +95,15 @@ public class CommunityActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*
+
         nav_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CommunityActivity.this, TripActivity.class);
+                Intent intent = new Intent(CommunityActivity.this, PlanViewActivity.class);
                 startActivity(intent);
             }
         });
-         */
+
         nav_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,10 +176,6 @@ public class CommunityActivity extends AppCompatActivity {
                 Toast.makeText(CommunityActivity.this, "오류: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public void onQueryError(Exception e) {
-                Toast.makeText(CommunityActivity.this, "오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
         });
     }
 
@@ -230,10 +226,6 @@ public class CommunityActivity extends AppCompatActivity {
                 Toast.makeText(CommunityActivity.this, "오류: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public void onQueryError(Exception e) {
-                Toast.makeText(CommunityActivity.this, "오류: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
         });
     }
 

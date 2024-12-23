@@ -117,10 +117,6 @@ public class PostCreateActivity extends Activity {
                 Toast.makeText(PostCreateActivity.this, "작성 실패: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public void onQueryError(Exception e) {
-
-            }
         });
     }
 }
