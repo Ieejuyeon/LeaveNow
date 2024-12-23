@@ -3,43 +3,36 @@
     android:layout_height="match_parent" >
 
     <!-- 상단 바 -->
-    <LinearLayout
-        android:id="@+id/top_bar"
+    <TextView
+        android:id="@+id/titleBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <!-- 삭제 버튼 텍스트 -->
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="'유저 이름'"
-            android:textSize="16sp"
-            android:textColor="#000"
-            android:background="?attr/selectableItemBackground"
-            android:layout_marginEnd="16dp" />
-
-        <!-- 앱 이름 -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Diary List"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#000" />
-    </LinearLayout>
+        android:layout_height="60dp"
+        android:background="#FFFFFF"
+        android:gravity="left|center"
+        android:text="   일기장"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:elevation="8dp"/>
 
     <!-- RecyclerView: 일기 목록 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+<<<<<<< Updated upstream
         android:layout_below="@id/top_bar"
+<<<<<<< HEAD
         android:layout_marginTop="8dp"
         android:padding="16dp"/>
+=======
+        android:layout_marginTop="8dp" />
+=======
+        android:layout_below="@id/titleBar"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"/>
+>>>>>>> Stashed changes
+>>>>>>> 20221171
 
     <!-- 일기 추가 버튼 (동그란 버튼) -->
     <Button
