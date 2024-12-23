@@ -106,14 +106,21 @@ public class DiaryDatabaseManager {
     }
 
     // 일기 수정
-    public void updateDiary(long id, String content, int mood) {
+    // 일기 수정 (이미지 경로 포함)
+    public void updateDiary(long id, String title, String content, int mood) {
         ContentValues values = new ContentValues();
+        values.put(DBHelper.COLUMN_TITLE, title);
         values.put(DBHelper.COLUMN_CONTENT, content);
         values.put(DBHelper.COLUMN_MOOD, mood);
 
-        database.update(DBHelper.TABLE_DIARIES, values, DBHelper.COLUMN_ID + " = ?",
+        int rowsAffected = database.update(DBHelper.TABLE_DIARIES, values, DBHelper.COLUMN_ID + " = ?",
                 new String[]{String.valueOf(id)});
+
+        if (rowsAffected == 0) {
+            Log.e("Database Error", "Failed to update diary with ID: " + id);
+        }
     }
+
 
     // 일기 삭제
     public void deleteDiary(long id) {

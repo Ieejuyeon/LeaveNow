@@ -20,6 +20,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 import java.io.InputStream;
 
 public class DiaryDetailActivity extends AppCompatActivity {
@@ -62,11 +63,12 @@ public class DiaryDetailActivity extends AppCompatActivity {
 
         // 수정 버튼 클릭 시 일기 내용 수정
         btnSave.setOnClickListener(v -> {
+            String title = tvTitle.getText().toString();
             String updatedContent = etContent.getText().toString();
             int moodRating = (int) rbMood.getRating();
 
             // 수정된 내용 저장
-            updateDiaryContent(updatedContent, moodRating);
+            updateDiaryContent(title, updatedContent, moodRating);
 
             // 수정 후 액티비티 종료
             finish();
@@ -77,7 +79,6 @@ public class DiaryDetailActivity extends AppCompatActivity {
     private void loadDiaryDetails() {
         dbManager.open();
 
-        // 일기 아이디에 해당하는 일기 가져오기
         DiaryItem diaryItem = dbManager.getDiaryById(diaryId);
 
         if (diaryItem != null) {
@@ -86,21 +87,28 @@ public class DiaryDetailActivity extends AppCompatActivity {
             etContent.setText(diaryItem.getContent());
             rbMood.setRating(Float.parseFloat(diaryItem.getMood()));
 
-            // 이미지 경로 문자열 추출
             String imagePaths = diaryItem.getImageUrl();
 
             if (imagePaths != null && !imagePaths.isEmpty()) {
                 String[] paths = imagePaths.split(";");
                 for (String path : paths) {
-                    Log.d("ImagePath", "Path: " + path);
-                    Uri fileUri = Uri.parse(path);
-                    addFileToLayout(fileUri);
+                    Log.d("ImagePath", "Loading path: " + path);
+                    try {
+                        Uri fileUri = Uri.parse(path);
+                        // "file://"로 시작하는 경로만 처리
+                        if (fileUri.getScheme() != null && fileUri.getScheme().equals("file")) {
+                            addFileToLayout(fileUri);
+                        }
+                    } catch (Exception e) {
+                        Log.e("ImagePath", "Failed to load Uri: " + path, e);
+                    }
                 }
             }
         }
 
         dbManager.close();
     }
+
 
     private void addFileToLayout(Uri fileUri) {
         View fileItem = LayoutInflater.from(this).inflate(R.layout.item_file, llAttachmentsContainer, false);
@@ -114,23 +122,30 @@ public class DiaryDetailActivity extends AppCompatActivity {
             tvFileName.setText("알 수 없는 파일");
         }
 
-        // 이미지 표시 로직 추가
-        if (isImageFile(fileUri)) {
-            try (InputStream inputStream = getContentResolver().openInputStream(fileUri)) {
+        try {
+            if ("content".equals(fileUri.getScheme())) {
+                // content:// URI 처리
+                InputStream inputStream = getContentResolver().openInputStream(fileUri);
                 if (inputStream != null) {
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                     ivFileIcon.setImageBitmap(bitmap);
+                    inputStream.close();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } else if ("file".equals(fileUri.getScheme())) {
+                // file:// URI 처리
+                ivFileIcon.setImageBitmap(BitmapFactory.decodeFile(new File(fileUri.getPath()).getAbsolutePath()));
+            } else {
                 ivFileIcon.setImageResource(R.drawable.ic_launcher_background); // 에러 시 기본 이미지
             }
-        } else {
-            ivFileIcon.setImageResource(R.drawable.ic_launcher_background); // 이미지가 아니면 파일 아이콘
+        } catch (Exception e) {
+            e.printStackTrace();
+            ivFileIcon.setImageResource(R.drawable.ic_launcher_background); // 에러 시 기본 이미지
         }
 
         llAttachmentsContainer.addView(fileItem);
     }
+
+
 
     // 이미지 파일인지 검사하는 메서드
     private boolean isImageFile(Uri uri) {
@@ -159,27 +174,12 @@ public class DiaryDetailActivity extends AppCompatActivity {
     }
 
     // 일기 내용 수정
-    private void updateDiaryContent(String content, int moodRating) {
+    private void updateDiaryContent(String title, String content, int moodRating) {
         dbManager.open();
 
-        // 수정된 내용 저장
-        dbManager.updateDiary(diaryId, content, moodRating);
+        // 수정된 내용과 이미지 경로 저장
+        dbManager.updateDiary(diaryId, title, content, moodRating);
 
         dbManager.close();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            if (uri != null) {
-                getContentResolver().takePersistableUriPermission(
-                        uri,
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                );
-            }
-        }
     }
 }
