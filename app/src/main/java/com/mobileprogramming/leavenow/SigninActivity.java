@@ -59,6 +59,11 @@ public class SigninActivity extends AppCompatActivity {
                         public void onQueryError(String errorMessage) {
                             tv_result.setText("오류: " + errorMessage);
                         }
+
+                        @Override
+                        public void onQueryError(Exception e) {
+
+                        }
                     });
 
                 } else {

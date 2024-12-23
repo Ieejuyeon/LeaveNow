@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <!-- 일기 제목 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일기 제목"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_diary_title1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="제목을 입력하세요"
+            android:padding="12dp"
+            android:drawablePadding="8dp" />
+
+        <!-- 작성 일자 -->
+        <TextView
+            android:id="@+id/tv_diary_date1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="작성 일자: 자동 입력"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/darker_gray" />
+
+        <!-- 일기 내용 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일기 내용"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/et_diary_content1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="오늘의 이야기를 적어보세요"
+            android:gravity="top|start"
+            android:padding="12dp"
+            android:inputType="textMultiLine" />
+
+        <!-- 기분 선택 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오늘의 기분"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <RatingBar
+            android:id="@+id/rb_mood1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="4"
+            android:stepSize="1"
+            android:rating="0"
+            android:layout_gravity="center"
+            android:progressBackgroundTint="@android:color/darker_gray"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 첨부파일 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="첨부파일"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_attach_file1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="파일 첨부"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white" />
+
+        <!-- 첨부된 이미지 미리보기 -->
+        <LinearLayout
+            android:id="@+id/ll_attachments_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical" />
+
+
+        <!-- 수정 버튼 -->
+        <Button
+            android:id="@+id/btn_save_diary1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="수정"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="32dp" />
+    </LinearLayout>
+</ScrollView>
