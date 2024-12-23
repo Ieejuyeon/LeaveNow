@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -129,16 +130,17 @@ public class PlanDetailsActivity extends AppCompatActivity {
                         Collections.sort(sortedDates); // 날짜 순 정렬
 
                         TabHost tabHost = findViewById(android.R.id.tabhost);
+                        TabWidget tabWidget =findViewById(android.R.id.tabs);
                         int tabIndex = 0;
 
+                        for(int i = 0; i< 5; i++){
+                            tabWidget.getChildAt(i).setVisibility(View.GONE);
+                        }
                         for (String date : sortedDates) {
                             if (tabIndex >= 5) break; // 최대 5일 표시
-
+                            tabWidget.getChildAt(tabIndex).setVisibility(View.VISIBLE);
                             int listViewId = getResources().getIdentifier("day" + (tabIndex + 1), "id", getPackageName());
                             setupListView(listViewId, dateDetails.get(date));
-
-                            // 탭 제목을 날짜로 업데이트
-                            tabHost.getTabWidget().getChildAt(tabIndex).setContentDescription(date);
 
                             tabIndex++;
                         }
