@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         // MainActivity에 입력된 ID를 이용하여 user의 name을 가져오는 구문
         String loginQuery = "SELECT nickname FROM user WHERE user_id = '" + id + "'";
         DB db = new DB(HomeActivity.this);
-        tv_name.setText(MainActivity.NICKNAME + "님.");
+        tv_name.setText(MainActivity.NICKNAME + "님,");
 
 
         //네비게이션 바 기능
