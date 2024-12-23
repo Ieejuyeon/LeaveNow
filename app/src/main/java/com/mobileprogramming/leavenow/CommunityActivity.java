@@ -169,6 +169,7 @@ public class CommunityActivity extends AppCompatActivity {
                             gridView.setVisibility(View.VISIBLE);
                             adapter.notifyDataSetChanged();
                         });
+                        isLoading = false; // 로드 종료 후 플래그 해제
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
