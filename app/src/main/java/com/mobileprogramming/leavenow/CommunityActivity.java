@@ -131,7 +131,12 @@ public class CommunityActivity extends AppCompatActivity {
     }
 
 
+    private boolean isLoading = false;
     private void loadCommunityPosts() {
+        if (isLoading) return; // 이미 로드 중이면 중단
+        isLoading = true;
+
+        postList.clear(); // 데이터 초기화
         String query = "SELECT c.post_id, c.title, c.content, c.attachment, c.create_at, c.user_id, u.nickname " +
                 "FROM community c " +
                 "LEFT JOIN user u ON c.user_id = u.user_id";
@@ -173,6 +178,7 @@ public class CommunityActivity extends AppCompatActivity {
 
             @Override
             public void onQueryError(String errorMessage) {
+                isLoading = false; // 로드 실패 후 플래그 해제
                 Toast.makeText(CommunityActivity.this, "오류: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
 
