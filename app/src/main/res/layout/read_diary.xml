@@ -89,14 +89,6 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp" />
 
-        <Button
-            android:id="@+id/btn_attach_file1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="파일 첨부"
-            android:backgroundTint="@color/black"
-            android:textColor="@android:color/white" />
-
         <!-- 첨부된 이미지 미리보기 -->
         <LinearLayout
             android:id="@+id/ll_attachments_container"

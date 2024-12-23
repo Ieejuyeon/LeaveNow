@@ -25,12 +25,16 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 public class NewDiaryActivity extends AppCompatActivity {
 
@@ -108,9 +112,18 @@ public class NewDiaryActivity extends AppCompatActivity {
     }
 
     private void addFileToLayout(Uri fileUri) {
+        // 이미 URI가 attachmentUris에 존재하면 추가하지 않음
+        if (attachmentUris.contains(fileUri)) {
+            Log.d("DuplicateUri", "이미 추가된 URI: " + fileUri.toString());
+            return; // 중복 URI는 추가하지 않음
+        }
+
+        Log.d("FileAdded", "File URI: " + fileUri.toString()); // 로그로 경로 확인
+
+        // 나머지 코드
         View fileItem = LayoutInflater.from(this).inflate(R.layout.item_file, llAttachmentsContainer, false);
         TextView tvFileName = fileItem.findViewById(R.id.tv_file_name);
-        ImageView ivFileIcon = fileItem.findViewById(R.id.iv_file_icon); // 레이아웃 파일에 이미지뷰 아이디 설정
+        ImageView ivFileIcon = fileItem.findViewById(R.id.iv_file_icon);
 
         String fileName = getFileName(fileUri);
         if (fileName != null) {
@@ -119,21 +132,39 @@ public class NewDiaryActivity extends AppCompatActivity {
             tvFileName.setText("알 수 없는 파일");
         }
 
-        // 이미지 표시 로직 추가
+        // 이미지 파일인 경우 내부 저장소에 저장
         if (isImageFile(fileUri)) {
-            try (InputStream inputStream = getContentResolver().openInputStream(fileUri)) {
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(fileUri);
                 if (inputStream != null) {
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    ivFileIcon.setImageBitmap(bitmap);
+
+                    // 파일 이름 생성
+                    String savedFileName = "attachment_" + System.currentTimeMillis() + ".jpg";
+                    File file = new File(getFilesDir(), savedFileName);
+
+                    // Bitmap을 파일로 저장
+                    try (FileOutputStream outputStream = new FileOutputStream(file)) {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                        Toast.makeText(this, "이미지 저장 완료: " + file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+
+                        // 파일 경로만 'file://'로 저장
+                        Uri savedUri = Uri.fromFile(file);
+                        if (!attachmentUris.contains(savedUri)) {
+                            attachmentUris.add(savedUri); // 중복 체크 후 추가
+                        }
+
+                        // 이미지 뷰에 미리 보기 표시
+                        ivFileIcon.setImageBitmap(bitmap);
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                // 에러 처리 (예를 들어 기본 이미지 표시)
                 ivFileIcon.setImageResource(R.drawable.ic_launcher_background); // 에러 시 기본 이미지
+                Toast.makeText(this, "이미지 저장 실패", Toast.LENGTH_SHORT).show();
             }
         } else {
-            // 이미지 파일이 아닌 경우 (기존 로직 유지)
-            ivFileIcon.setVisibility(View.GONE);
+            ivFileIcon.setVisibility(View.GONE); // 이미지가 아닌 경우 아이콘 숨기기
         }
 
         llAttachmentsContainer.addView(fileItem);
@@ -178,8 +209,12 @@ public class NewDiaryActivity extends AppCompatActivity {
 
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         StringBuilder filePaths = new StringBuilder();
+
         for (Uri uri : attachmentUris) {
-            filePaths.append(uri.toString()).append(";");
+            // 경로 중복 확인 후 저장
+            if (!filePaths.toString().contains(uri.toString())) {
+                filePaths.append(uri.toString()).append(";");
+            }
         }
 
         long rowId = diaryDatabaseManager.addDiary(title, content, timestamp, filePaths.toString(), mood);
@@ -192,4 +227,5 @@ public class NewDiaryActivity extends AppCompatActivity {
             Toast.makeText(this, "일기 저장 실패. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
