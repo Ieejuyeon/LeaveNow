@@ -1,9 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlanDetailsCreateActivity">
+    android:background="@color/white"
+    tools:context=".PlanDetailsCreateActivity"
+    android:padding="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="장소 이름"
+                android:textSize="20dp" />
+
+            <EditText
+                android:maxLength="10"
+                android:id="@+id/title_plandetail_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="여행 이름을 입력하세요."
+                android:padding="10dp" />
+        </LinearLayout>
+        <TextView
+            android:textAlignment="textEnd"
+            android:text="공백 포함 글자 수 10자 제한"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="방문 날짜"
+                android:textSize="20dp" />
+            <ImageButton
+                android:id="@+id/cal_plandetail_create"
+                android:background="@color/white"
+                android:src="@drawable/calender"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/date_plandetail_create"
+                android:textSize="20dp"
+                android:text="25/01/01"
+                android:inputType="date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="시작 시간"
+                android:textSize="20dp" />
+            <ImageButton
+                android:id="@+id/calstart_plandetail_create"
+                android:background="@color/white"
+                android:src="@drawable/calender"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/timestart_plandetail_create"
+                android:textSize="20dp"
+                android:text="25/01/01"
+                android:inputType="date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="종료 시간"
+                android:textSize="20dp" />
+            <ImageButton
+                android:id="@+id/calend_plandetail_create"
+                android:background="@color/white"
+                android:src="@drawable/calender"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/timeend_plandetail_create"
+                android:textSize="20dp"
+                android:text="25/01/01"
+                android:inputType="date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_create_plandetail_create"
+                android:text="생성"
+                android:background="#FFF9F0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btn_cancel_plandetail_create"
+                android:background="#C2E7FB"
+                android:text="취소"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

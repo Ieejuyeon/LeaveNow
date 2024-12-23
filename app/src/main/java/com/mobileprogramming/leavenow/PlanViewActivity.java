@@ -83,9 +83,6 @@ public class PlanViewActivity extends AppCompatActivity {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.plan, parent, false);
             }
-//            LayoutInflater lif = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            View plan = lif.inflate(R.layout.plan, parent, false);
-
             TextView tp = convertView.findViewById(R.id.title_plan);
             TextView dp = convertView.findViewById(R.id.date_plan);
             TextView cp = convertView.findViewById(R.id.content_plan);

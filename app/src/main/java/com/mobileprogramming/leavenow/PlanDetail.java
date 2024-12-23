@@ -1,17 +1,16 @@
 package com.mobileprogramming.leavenow;
 
-import java.sql.Time;
-import java.util.Date;
-
 public class PlanDetail {
-    int id;
-    String place_name;
-    Date visit_date;
-    Time start_time;
+    public String visitDate;
+    public String placeName;
+    public String startTime;
+    public String endTime;
 
-    Time end_time;
-    public PlanDetail(){
-
+    public PlanDetail(String visitDate, String placeName, String startTime, String endTime) {
+        this.visitDate = visitDate;
+        this.placeName = placeName;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
 }
