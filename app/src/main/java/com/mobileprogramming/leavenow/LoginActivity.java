@@ -78,10 +78,6 @@ public class LoginActivity extends AppCompatActivity {
                             tv_result.setText("오류: " + errorMessage);
                         }
 
-                        @Override
-                        public void onQueryError(Exception e) {
-
-                        }
                     });
                     //여기까지 DB부분
 

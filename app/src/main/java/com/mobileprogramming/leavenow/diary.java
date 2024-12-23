@@ -53,15 +53,15 @@ public class diary extends AppCompatActivity implements DiaryAdapter.OnDiaryInte
                 startActivity(intent);
             }
         });
-        /*
+
         nav_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, TripActivity.class);
+                Intent intent = new Intent(diary.this, PlanViewActivity.class);
                 startActivity(intent);
             }
         });
-         */
+
         nav_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

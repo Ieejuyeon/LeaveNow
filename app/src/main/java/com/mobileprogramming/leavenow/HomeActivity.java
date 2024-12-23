@@ -44,15 +44,15 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        /*
+
         nav_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, TripActivity.class);
+                Intent intent = new Intent(HomeActivity.this, PlanViewActivity.class);
                 startActivity(intent);
             }
         });
-         */
+
         nav_diary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

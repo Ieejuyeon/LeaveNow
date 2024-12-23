@@ -16,6 +16,18 @@
         android:theme="@style/Theme.LeaveNow"
         tools:targetApi="31">
         <activity
+            android:name=".PlanDetailsCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlanDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlanCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlanViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".SigninActivity"
             android:exported="false" />
         <activity
