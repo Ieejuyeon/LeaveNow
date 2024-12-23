@@ -69,6 +69,13 @@ public class PlanDetailsCreateActivity extends AppCompatActivity {
                 String vd = visit_date.getText().toString();
                 String st = timeStartTextView.getText().toString();
                 String et = timeEndTextView.getText().toString();
+                if(!dateAvailable(plan_date, vd)){
+                    Toast.makeText(getApplicationContext(), "유효하지 않은 날짜입니다.", Toast.LENGTH_SHORT).show();
+                }
+                else if(!timeAvailable(st, et)){
+                    Toast.makeText(getApplicationContext(), "유효하지 않은 시간입니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
                 String query = "insert into plan_details (plan_id, place_name, visit_date, start_time, end_time) values ('" + plan_id + "' , '" + t + "', '" + vd + "', '" + st + "', '" + et + "')";
                 DB db = new DB(PlanDetailsCreateActivity.this);
                 db.executeQuery(query, new DB.QueryResponseListener() {
@@ -88,7 +95,7 @@ public class PlanDetailsCreateActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "오류발생 : " + errorMessage, Toast.LENGTH_LONG).show();
                     }
                 });
-            }
+            }}
         });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -133,19 +140,16 @@ public class PlanDetailsCreateActivity extends AppCompatActivity {
     }
 
     private String editDate(int year, int month, int day) {
-        String y = year % 100 + "";
         String m = (month + 1) + "";
         String d = day + "";
-        if (year % 100 == year % 10) {
-            y = "0" + y;
-        }
+
         if (month % 10 == month) {
             m = "0" + m;
         }
         if (day % 10 == day) {
             d = "0" + d;
         }
-        return y + "/" + m + "/" + d;
+        return year + "-" + m + "-" + d;
     }
     private void showDatePickerDialog(PlanCreateActivity.OnDateSelectedListener onDateSelected) {
         // 현재 날짜 가져오기
@@ -171,5 +175,29 @@ public class PlanDetailsCreateActivity extends AppCompatActivity {
 
     interface OnDateSelectedListener {
         void onDateSelected(int year, int month, int day);
+    }
+
+    private boolean dateAvailable(String plan_date, String plandetail_date){
+        String[] startDate = plan_date.substring(0,10).split("-");
+        String[] endDate = plan_date.substring(13).split("-");
+        String[] date = plandetail_date.split("-");
+
+        for(int i = 0; i < 3; i++){
+            if(Integer.parseInt(startDate[i])>Integer.parseInt(date[i]) || Integer.parseInt(endDate[i])<Integer.parseInt(date[i])){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean timeAvailable(String start_time, String end_time){
+        String[] st = start_time.split(":");
+        String[] et = end_time.split(":");
+        for(int i = 0; i < 2; i++){
+            if(Integer.parseInt(st[i]) > Integer.parseInt(et[i])){
+                return false;
+            }
+        }
+        return true;
     }
 }

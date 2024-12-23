@@ -20,19 +20,9 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-<<<<<<< Updated upstream
-        android:layout_below="@id/top_bar"
-<<<<<<< HEAD
-        android:layout_marginTop="8dp"
-        android:padding="16dp"/>
-=======
-        android:layout_marginTop="8dp" />
-=======
         android:layout_below="@id/titleBar"
         android:layout_marginTop="8dp"
         android:padding="16dp"/>
->>>>>>> Stashed changes
->>>>>>> 20221171
 
     <!-- 일기 추가 버튼 (동그란 버튼) -->
     <Button

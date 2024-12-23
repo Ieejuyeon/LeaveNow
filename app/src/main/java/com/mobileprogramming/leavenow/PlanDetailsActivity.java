@@ -247,7 +247,7 @@ public class PlanDetailsActivity extends AppCompatActivity {
             PlanDetail detail = getItem(position);
             title.setText(detail.placeName);
             st.setText(detail.startTime);
-            et.setText(detail.startTime);
+            et.setText(detail.endTime);
 
             return convertView;
         }
